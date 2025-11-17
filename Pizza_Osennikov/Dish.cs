@@ -26,7 +26,7 @@ namespace Pizza_Osennikov
             public int wes;
 
             public int countOrder;
-            public int orders;
+            public bool orders;
         }
 
         public class Ingredient
