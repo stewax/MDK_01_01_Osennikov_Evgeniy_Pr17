@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,9 +22,47 @@ namespace Pizza_Osennikov.Layouts
     /// </summary>
     public partial class Main : Page
     {
-        public Main()
+        public MainWindow mainWindow;
+        public List<Dish> dishs = new List<Dish>(); // коллекция блюд
+
+        public Main(MainWindow _mainWindow)
         {
             InitializeComponent();
+            mainWindow = _mainWindow;
+            Dish newDish = new Dish();
+            newDish.img = "img-1";
+            newDish.name = "Сливочная";
+            newDish.description = "Пицца - итальянское национальное блюдо в виде круглой открытой дрожжевой лепёшки";
+            Dish.Ingredient newIngredient = new Dish.Ingredient();
+            newIngredient.name = "соус «Кунжутный»";
+            newDish.ingredients.Add(newIngredient);
+            newIngredient = new Dish.Ingredient();
+            newIngredient.name = "сыр «Моцарелла»";
+            newDish.ingredients.Add(newIngredient);
+            newIngredient = new Dish.Ingredient();
+            newIngredient.name = "сыр Моцарелла мягкий";
+            newDish.ingredients.Add(newIngredient);
+            newIngredient = new Dish.Ingredient();
+            newIngredient.name = "помидоры";
+            newDish.ingredients.Add(newIngredient);
+            Dish.Sizes newSize = new Dish.Sizes();
+            newSize.size = 23;
+            newSize.price = 380;
+            newSize.wes = 530;
+            newDish.sizes.Add(newSize);
+            newSize = new Dish.Sizes();
+            newSize.size = 30;
+            newSize.price = 760;
+            newSize.wes = 560;
+            newDish.sizes.Add(newSize);
+            newSize = new Dish.Sizes();
+            newSize.size = 40;
+            newSize.price = 1210;
+            newSize.wes = 730;
+            newDish.sizes.Add(newSize);
+            dishs.Add(newDish);
+            CreatePizza();
+
         }
 
         public void CreatePizza()
@@ -132,7 +171,7 @@ namespace Pizza_Osennikov.Layouts
                 };
                 global.Children.Add(button1); 
 
-                button2.Content = dishes[i].size[1].size + " см."; 
+                button2.Content = dishs[i].sizes[1].size + " см."; 
                 button2.HorizontalAlignment = System.Windows.HorizontalAlignment.Right; 
                 button2.VerticalAlignment = System.Windows.VerticalAlignment.Top; 
                 button2.
@@ -151,8 +190,8 @@ namespace Pizza_Osennikov.Layouts
                     button3.Background = (Brush)bc.ConvertFrom("#FFDD3333"); 
                     button3.Foreground = Brushes.White; 
 
-                    dishs[int.Parse(button1.Tag.ToString())].activeSile = 1; 
-                    count.Text = dishs[int.Parse(button1.Tag.ToString())].size[1].countOrder.ToString();
+                    dishs[int.Parse(button1.Tag.ToString())].activeSize = 1; 
+                    count.Text = dishs[int.Parse(button1.Tag.ToString())].sizes[1].countOrder.ToString();
                     order.IsChecked = dishs[int.Parse(button1.Tag.ToString())].sizes[1].orders;
                 };
                 global.Children.Add(button2);
@@ -175,8 +214,8 @@ namespace Pizza_Osennikov.Layouts
                     button2.Background = (Brush)bc.ConvertFrom("#FFDD3333");
                     button2.Foreground = Brushes.White;
 
-                    dishs[int.Parse(button1.Tag.ToString())].activeSile = 2;
-                    count.Text = dishs[int.Parse(button1.Tag.ToString())].size[2].countOrder.ToString();
+                    dishs[int.Parse(button1.Tag.ToString())].activeSize = 2;
+                    count.Text = dishs[int.Parse(button1.Tag.ToString())].sizes[2].countOrder.ToString();
                     order.IsChecked = dishs[int.Parse(button1.Tag.ToString())].sizes[2].orders;
                 };
                 global.Children.Add(button3);
